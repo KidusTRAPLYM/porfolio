@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Admin</title>
+    <link rel="stylesheet" href="/CSS/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main class="admin-page">
+      <% if (showLogin) { %>
+      <h2>Admin Login</h2>
+      <% if (typeof error !== "undefined") { %>
+      <p style="color: #d9534f"><%= error %></p>
+      <% } %>
+      <form action="/admin" method="post">
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter admin password"
+          required
+          style="
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            width: 100%;
+            margin-bottom: 16px;
+          "
+        />
+        <button type="submit">Login</button>
+      </form>
+      <% } else { %>
+      <h2>Contact Messages</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Message</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% contacts.forEach(contact => { %>
+          <tr>
+            <td><%= contact.name %></td>
+            <td><%= contact.email %></td>
+            <td><%= contact.message %></td>
+            <td><%= contact.date.toLocaleString() %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <% } %>
+    </main>
+  </body>
+</html>

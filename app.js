@@ -41,7 +41,7 @@ app.get("/admin", async (req, res) => {
 
 app.post("/admin", async (req, res) => {
   const { password } = req.body;
-  if (password === "betty!@#$%") {
+  if (password === process.env.ADMIN_PASSWORD) {
     req.session.isAdmin = true;
     const contacts = await Contact.find().sort({ date: -1 });
     res.render("admin", { contacts, showLogin: false });
@@ -81,25 +81,7 @@ app.get("/admin-login", (req, res) => {
   res.render("admin-login");
 });
 
-// Admin authentication middleware
-function adminAuth(req, res, next) {
-  const { password } = req.body;
-  if (password === process.env.ADMIN_PASSWORD) {
-    next();
-  } else {
-    res.render("error", { message: "Unauthorized access." });
-  }
-}
-
 // Admin POST route for authentication
-app.post("/admin", adminAuth, async (req, res) => {
-  try {
-    const contacts = await Contact.find().sort({ date: -1 });
-    res.render("admin", { contacts });
-  } catch (err) {
-    res.status(500).send("Error loading contacts.");
-  }
-});
 
 app.get("/architecture", (req, res) => {
   res.render("architecture");

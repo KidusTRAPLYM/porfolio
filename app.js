@@ -3,8 +3,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const app = express();
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 const Contact = require("./models/Contact");
+require("dotenv").config();
 
 app.use(express.static("public"));
 app.use(express.json());
@@ -55,13 +56,10 @@ app.post("/admin", async (req, res) => {
 
 (async () => {
   try {
-    await mongoose.connect(
-      "mongodb+srv://traplympr:traply%5Fninja%5F1234@cluster0.dlgfa.mongodb.net/portfolio?retryWrites=true&w=majority&appName=Cluster0",
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      }
-    );
+    await mongoose.connect(process.env.MONGODB_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     console.log("Connected to MongoDB (portfolio database)");
   } catch (err) {
     console.error("MongoDB connection error:", err);
@@ -86,7 +84,7 @@ app.get("/admin-login", (req, res) => {
 // Admin authentication middleware
 function adminAuth(req, res, next) {
   const { password } = req.body;
-  if (password === "betty!@#$%") {
+  if (password === process.env.ADMIN_PASSWORD) {
     next();
   } else {
     res.render("error", { message: "Unauthorized access." });

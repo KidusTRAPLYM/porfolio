@@ -6,7 +6,7 @@ box-sizing: border-box;
 }
 :root{
 --Font-family--:"Playfair Display" , serif;
---PRIMARY-COLOR--:#D4AF37; /* Rich gold */;
+--PRIMARY-COLOR--:hsl(218, 87%, 33%);
 --Secondary-Color--:#000;
 --Background-Color--:#f4f4f4;
 }

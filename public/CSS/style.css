@@ -109,6 +109,7 @@ width: 372px;
 #about p{
 width: 600px;
 font-size: 20px;
+line-height: 36px;
 }
 #profile{
 display: flex;
@@ -551,17 +552,20 @@ main.success-message h2 {
   background-color: #f9f9f9;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  flex-direction: column;
 }
 
 .social_media > div {
-  display: flex;
-  align-items: center;
-  flex: 1 1 250px;
-  gap: 1rem;
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-  transition: transform 0.3s ease;
+    display: flex
+;
+    align-items: center;
+    /* flex: 1 1 250px; */
+    gap: 1rem;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+    width: 100%;
 }
 
 .social_media > div:hover {
